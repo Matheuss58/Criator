@@ -11,7 +11,7 @@
     <header class="topbar">
       <div>
         <h1>Criator</h1>
-        <p>Engine de edicao automatica</p>
+        <p>Diretor local de edits Phonk</p>
       </div>
       <div id="healthBadge" class="badge off">Verificando</div>
     </header>
@@ -39,25 +39,17 @@
       </div>
 
       <div class="settings">
-        <label>Modo
-          <select id="modo">
-            <option value="legendado">Legenda</option>
-            <option value="ritmico">Phonk</option>
-          </select>
-        </label>
-        <label>Resolucao
+        <label>Formato
           <select id="resolution">
-            <option value="1080x1920">9:16</option>
-            <option value="1920x1080">16:9</option>
-            <option value="1080x1080">1:1</option>
+            <option value="1080x1920">Vertical 9:16</option>
+            <option value="1920x1080">Horizontal 16:9</option>
           </select>
         </label>
-        <label>Duracao
+        <label>Duração exata (segundos)
           <input type="number" id="duration" value="30" min="3" max="180" step="0.1">
         </label>
-        <label>FPS
-          <input type="number" id="fps" value="60" min="24" max="60">
-        </label>
+        <div class="fixed-setting"><span>Modo</span><strong>Phonk</strong></div>
+        <div class="fixed-setting"><span>Entrega</span><strong>60 FPS</strong></div>
       </div>
 
       <div class="actions">

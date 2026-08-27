@@ -1,7 +1,0 @@
--r requirements.txt
-
-# Pacote opcional. Use apenas com CRIATOR_ENABLE_DEEP_VISION=1.
-torch
-ultralytics
-mediapipe
-open_clip_torch

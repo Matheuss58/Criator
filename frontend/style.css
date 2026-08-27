@@ -153,6 +153,26 @@ label {
   text-transform: uppercase;
 }
 
+.fixed-setting {
+  min-height: 65px;
+  display: grid;
+  align-content: center;
+  gap: 7px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #101217;
+}
+
+.fixed-setting span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.fixed-setting strong { color: var(--accent-2); }
+
 select,
 input {
   width: 100%;

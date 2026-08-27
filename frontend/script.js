@@ -12,10 +12,8 @@ const els = {
   audioMeta: $("audioMeta"),
   videoPreview: $("videoPreview"),
   audioPreview: $("audioPreview"),
-  modo: $("modo"),
   resolution: $("resolution"),
   duration: $("duration"),
-  fps: $("fps"),
   processBtn: $("processBtn"),
   cancelBtn: $("cancelBtn"),
   downloadLink: $("downloadLink"),
@@ -149,8 +147,6 @@ async function startJob() {
   form.append("audio", audioFile);
   form.append("resolution", els.resolution.value);
   form.append("duration", els.duration.value);
-  form.append("fps", els.fps.value);
-  form.append("modo", els.modo.value);
 
   try {
     const response = await fetch(`${API}/project`, { method: "POST", body: form });
@@ -208,7 +204,7 @@ async function checkHealth() {
   try {
     const response = await fetch(`${API}/health`);
     const data = await response.json();
-    const ok = Boolean(data.ffmpeg?.ok && data.python?.ok);
+    const ok = Boolean(data.ffmpeg?.ok && data.python?.ok && data.engine?.ok);
     els.healthBadge.className = `badge ${ok ? "on" : "off"}`;
     els.healthBadge.textContent = ok ? "Ambiente pronto" : "Ambiente incompleto";
   } catch {

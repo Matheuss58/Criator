@@ -407,8 +407,8 @@ app.post('/project', upload.fields([{ name: 'video' }, { name: 'audio' }]), asyn
   const projectId = uuidv4();
   const resolution = req.body.resolution || '1080x1920';
   const duration = parseFloat(req.body.duration) || 30;
-  const fps = parseInt(req.body.fps, 10) || 60;
-  const modo = req.body.modo || 'ritmico';
+  const fps = 60;
+  const modo = 'ritmico';
   const data = buildJobData(files, projectId);
 
   const job = await videoQueue.add('process', {
@@ -517,10 +517,7 @@ app.get('/health', (req, res) => {
   const ffmpeg = runCheck('ffmpeg', ['-version']);
   const ffmpegEncoders = runCheck('ffmpeg', ['-hide_banner', '-encoders'], { maxOutput: 200000 });
   const python = runCheck(pythonExe, ['--version']);
-  const demucs = runCheck(pythonExe, ['-c', 'import demucs; print("ok")']);
-  const fasterWhisper = runCheck(pythonExe, ['-c', 'import faster_whisper; print("ok")']);
-  const whisper = runCheck(pythonExe, ['-c', 'import whisper; print("ok")']);
-  const cuda = runCheck(pythonExe, ['-c', 'import torch; print(torch.cuda.is_available())']);
+  const engine = runCheck(pythonExe, ['-c', 'import cv2, librosa, numpy; print("ok")'], { timeout: 15000 });
 
   res.json({
     status: 'ok',
@@ -533,14 +530,7 @@ app.get('/health', (req, res) => {
       nvenc: ffmpegEncoders.ok && ffmpegEncoders.output.includes('h264_nvenc')
     },
     python,
-    demucs,
-    fasterWhisper,
-    whisper,
-    cuda: {
-      ok: cuda.ok,
-      available: String(cuda.output).includes('True'),
-      output: cuda.output
-    },
+    engine,
     disk: getDiskInfo(),
     memory: {
       freeGb: Number((os.freemem() / 1024 / 1024 / 1024).toFixed(2)),
