@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criator</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <h1>Criator</h1>
+        <p>Engine de edicao automatica</p>
+      </div>
+      <div id="healthBadge" class="badge off">Verificando</div>
+    </header>
+
+    <section class="workspace">
+      <div class="media-grid">
+        <div class="dropzone" id="videoZone">
+          <span class="icon">V</span>
+          <strong id="videoName">Escolher video</strong>
+          <small id="videoMeta">MP4, MOV, WEBM</small>
+          <input type="file" id="videoInput" accept="video/*">
+        </div>
+
+        <div class="dropzone" id="audioZone">
+          <span class="icon">A</span>
+          <strong id="audioName">Escolher audio</strong>
+          <small id="audioMeta">MP3, WAV, M4A</small>
+          <input type="file" id="audioInput" accept="audio/*">
+        </div>
+      </div>
+
+      <div class="preview-grid">
+        <video id="videoPreview" controls muted playsinline></video>
+        <audio id="audioPreview" controls></audio>
+      </div>
+
+      <div class="settings">
+        <label>Modo
+          <select id="modo">
+            <option value="legendado">Legenda</option>
+            <option value="ritmico">Phonk</option>
+          </select>
+        </label>
+        <label>Resolucao
+          <select id="resolution">
+            <option value="1080x1920">9:16</option>
+            <option value="1920x1080">16:9</option>
+            <option value="1080x1080">1:1</option>
+          </select>
+        </label>
+        <label>Duracao
+          <input type="number" id="duration" value="30" min="3" max="180" step="0.1">
+        </label>
+        <label>FPS
+          <input type="number" id="fps" value="60" min="24" max="60">
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="processBtn" class="btn primary">Criar video</button>
+        <button id="cancelBtn" class="btn" disabled>Cancelar</button>
+        <a id="downloadLink" class="btn primary hidden" download>Baixar video</a>
+      </div>
+    </section>
+
+    <section class="progress-card hidden" id="progressSection">
+      <div class="progress-head">
+        <div>
+          <span id="statusStep">ready</span>
+          <p id="statusText">Selecione os arquivos para comecar.</p>
+        </div>
+        <div class="spinner hidden" id="spinner"></div>
+        <strong id="etaText">ETA --</strong>
+      </div>
+      <div class="bar"><div id="progressFill"></div></div>
+    </section>
+
+    <section class="log-card hidden" id="logSection">
+      <button id="logToggle" class="log-toggle">
+        <span>Logs</span>
+        <span id="logCount">0 linhas</span>
+      </button>
+      <pre id="logPanel"></pre>
+    </section>
+
+    <section class="error-box hidden" id="errorBox"></section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>

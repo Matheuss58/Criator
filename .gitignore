@@ -1,6 +1,4 @@
-﻿# Auto detect text files and perform LF normalization
-* text=auto
-ai/venv/
+﻿ai/venv/
 backend/node_modules/
 uploads/
 outputs/
